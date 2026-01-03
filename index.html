@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>猜歌遊戲</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+    button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>猜歌遊戲</h1>
+
+  <p>點擊播放音樂，猜歌名！</p>
+
+  <!-- 播放音樂按鈕 -->
+  <button onclick="playSong(0)">播放 第一首歌 🎵</button>
+  <button onclick="playSong(1)">播放 第二首歌 🎵</button>
+  <button onclick="playSong(2)">播放 第三首歌 🎵</button>
+
+  <!-- 音樂元素 -->
+  <audio id="music"></audio>
+
+  <!-- 輸入答案 -->
+  <p>
+    <input type="text" id="answer" placeholder="輸入歌名">
+    <button onclick="checkAnswer()">確認答案</button>
+  </p>
+
+  <p id="result"></p>
+
+  <script>
+    // 歌曲陣列（把 MP3 放在同一個資料夾）
+    const songs = ["song1.mp3", "song2.mp3", "song3.mp3"];
+    const songNames = ["壞殺手", "其實", "簡約用愛"]; // 對應正確答案
+
+    const music = document.getElementById("music");
+    let currentSong = 0;
+
+    // 播放指定歌曲
+    function playSong(index) {
+      currentSong = index;
+      music.src = songs[index];
+      music.play();
+      document.getElementById("result").textContent = "";
+      document.getElementById("answer").value = "";
+    }
+
+    // 檢查答案
+    function checkAnswer() {
+      const input = document.getElementById("answer").value.trim();
+      if(input === songNames[currentSong]) {
+        document.getElementById("result").textContent = "答對了！✅";
+      } else {
+        document.getElementById("result").textContent = "答錯，再試一次 ❌";
+      }
+    }
+  </script>
+</body>
+</html>
